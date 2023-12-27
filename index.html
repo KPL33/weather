@@ -6,27 +6,32 @@
     <title>WeatherWise</title>
     <script src="./resources/script.js" defer></script>
     <link rel="stylesheet" href="./resources/style.css" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Edu+QLD+Beginner:wght@600&family=Kanit:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <h1>WeatherWise</h1>
-    </header>
-
-    <aside class="search">
-        <h3 class="search-title">Search for a city.</h3>
-        <textarea
-        id="search-input"
-        placeholder=""
-        aria-label="City search field"
-        ></textarea>
+    <aside>
+        <header>
+            <h1>WeatherWise</h1>
+        </header>
+        <div class="search">
+            <h2 class="search-title">Search for a city.</h2>
+            <textarea
+            id="search-input"
+            placeholder=""
+            aria-label="City search field"
+            ></textarea>
         
-        <h4 class="error" id="city-error">
-        City not found. Please try your search again.</h4>
+            <h4 class="error" id="city-error">
+            City not found. Please try your search again.</h4>
 
-        <h4 class="error" id="blank-error">
-        Please enter a city name before searching.</h4>
+            <h4 class="error" id="blank-error">
+            Please enter a city name before searching.</h4>
 
-        <button type="em" class="btn" id="search-btn">Search</button>
+            <button type="em" class="btn" id="search-btn">Search</button>
+        </div>
 
         <div class="history">
             <h2 class="history-title">History</h2>
@@ -36,26 +41,19 @@
     </aside>
 
     <main class="results">
-        <div class="current">
-            <h2 class="current-title">Current</h2>
-
-            <div id="current-conditions">
-            </div>
-        </div>
+        <div id="current-conditions"></div>
     
         <div class="six-day">
-            <h2 class="six-day-title">Next 6 Days</h2>
-            <div class="future-days" id="day2">day2</div>
-            <div class="future-days" id="day3">day3</div>
-            <div class="future-days" id="day4">day4</div>
-        <div class="future-days" id="day5">day5</div>
-        <div class="future-days" id="day6">day6</div>
-        <div class="future-days" id="day7">day7</div>
+            
+            <div class="future-days">See your upcoming weather here.</div>
+            <div class="future-days">See your upcoming weather here.</div>
+            <div class="future-days">See your upcoming weather here.</div>
+            <div class="future-days">See your upcoming weather here.</div>
         </div>
     </main>
 
     <footer>
-        <h5>Made by Kevin Lewis</h5>
+        <h5 class = "by">Made by <span class="emphasize">Kevin Lewis</span></h5>
         <div class="socials">
             <a href="https://www.linkedin.com/in/kevin-lewis92126/"><img id="linkedin" src="./resources/assets/LI-In-Bug.svg" alt="LinkedIn logo"
             /></a>
@@ -70,6 +68,8 @@
             alt="LeetCode logo"
             /></a>
         </div>
+        <h5 class = "by">Powered by</h5>
+        <img class = "wise" src="./resources/assets/openweather_white_text.svg"></div>
     </footer>
 </body>
 </html>

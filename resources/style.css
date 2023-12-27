@@ -7,21 +7,21 @@
 }
 
 :root {
-    --background: #02f1fd;
-    --button: #cfe9f7;
-    --button-text: #000;
-    --main: #ffee00;
-    --gray: #d6d5d5;
-    --white: #fff;
+    --6: #0b1d45;;
+    --5: #2769f7;
+    --4: #9fbcff;
+    --3: #abc4ff;
+    --2: #c1d3fe;
+    --1: #ccdbfd;
+    --0: #edf2fa;
 }
 
 body {
     text-align: center;
     display: grid;
     grid-template-columns: 1fr 3fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 100px;
     grid-template-areas:
-    "header header"
     "search results"
     "footer footer";
     min-height: 100vh;
@@ -30,81 +30,286 @@ body {
 header {
     grid-area: header;
     background-color: red;
+    height: auto;
+}
+
+aside {
+    grid-template-areas:
+    "header"
+    "search"
+    "history";
+    display: grid;
+    grid-template-rows: 2fr 3fr 5fr;
+    background-color: var(--1);
 }
 
 .search {
     grid-area: search;
-    background-color: teal;
+    grid-template-areas:
+    "search-title"
+    "search-input"
+    "search-btn";
+    background: linear-gradient(var(--3), var(--4));
+    display: grid;
+    gap: 10px;
+    padding: 10px;
 }
 
-.history {
-    background-color: cornsilk;
-    grid-area: history;
-    padding: 20px;
+.search-title {
+    grid-area: search-title;
+    margin: 5px 20px 0px 20px;
+    place-self: center;
+    
 }
 
 .error {
     display: none;
+    font-size: 18px;
 }
 
 .btn {
-    color: var(--button-text);
-    background-color: var(--button);
+    color: var(--0);
+    background-color: var(--5);
     width: 80%;
-    border-radius: 50% 20% / 50% 20%;
     place-self: center;
+    font-size: 26px;
+}
+
+.btn:hover {
+    color: var(--5);
+    background-color: var(--0);
+    cursor: pointer;
+}
+
+.btn, .history-title, .by  {
+    font-family: "Kanit", sans-serif;
+    font-style: italic;
+}
+
+#history-list .btn {
+    border-radius: 0 1em / 0 1em;
+    width: auto;
+    padding: 0 10px;
+}
+
+.search-title, .history-title, #current-conditions h1 {
+    font-size: 38px;
+}
+
+.search-title, .history-title, #history-list .btn, #current-conditions h1 {
+    transform: rotate(-3deg);
 }
 
 #search-btn {
-    width: 50%;
-    border-radius: 3em;
+    grid-area: search-btn;
+    background-color: var(--6);
+    color: var(--0);
+    width: 70%;
+    border-radius: 2em;
+    margin: 10px 0;
+}
+
+#search-btn:hover {
+    background-color: var(--0);
+    color: var(--6);
+    font-style: italic;
+}
+
+#search-input {
+    grid-area: search-input;
+    margin: 0 20px;
+    font-size: 38px;
+    min-height: 50px;
+    max-height: 60px;
+    max-width: 90%;
+    min-width: 85%;
+    text-align: center;
+    place-self: center;
+}
+
+#search-input, .search-title, .error, #current-conditions h1 {
+    font-family: 'Edu QLD Beginner', cursive;
+}
+
+.history {
+    grid-template-rows: auto auto;
+    grid-template-areas:
+    "history-title"
+    "history-list";
+    grid-area: history;
+    background: linear-gradient(var(--4), var(--0));
+    border-top: 10px solid var(--1);
+    border-style: groove;
+    display: grid;
+    grid-auto-flow: dense;
+    grid-gap: 10px;
+}
+
+.history-title {
+    grid-area: history-title;
+    color: var(--6);
+}
+
+#history-list {
+    grid-area: history-list;
+    padding: 0 0 20px 0;
+    
+}
+
+#history-list .btn  {
+    font-size: 26px;
+    font-style: italic;
+    margin: 10px;
+    padding: 10px;
 }
 
 .results {
     grid-area: results;
     grid-template-areas:
-    "current"
+    "current-conditions"
     "six-day";
-    background-color: lightcoral;
+    background-color: var(--6);
     display: grid;
-    padding: 10px;
+    padding: 0 10px;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-}
-
-.current {
-    background-color: gray;
-    grid-column: span 3;
-    padding: 10px;
-}
-
-#current-conditions {
-    background-color: rgb(144, 222, 206);
-    grid-column: span 3;
-    grid-area: current-conditions; 
-    border-radius: 5em;
-    height: auto;
-}
-
-.six-day {
-    grid-area: six-day;
-    background-color: #02f1fd;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-rows: auto auto;
     grid-gap: 10px;
 }
 
-.six-day-title {
-    /* text-align: center; */
+#current-conditions {
+    display: grid;
+    grid-template-areas:
+    "message message message"
+    "current-city current-city current-img"
+    "current-stats current-stats current-stats";
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto min-content auto;
     grid-column: span 3;
-    background-color: purple;
+    grid-area: current-conditions; 
+    border-radius: 2em;
+    margin-top: 30px;
+    background: linear-gradient(var(--5), var(--0));
+}
+
+.conditions-message {
+    grid-area: message;
+    grid-column: span 3;
+    font-size: 30px;
+    color: var(--1);
+    font-family: "Kanit", sans-serif;
+    place-self: center;
+    padding: 0 20px;
+}
+
+#current-conditions h1 {
+    grid-area: current-city;
+    grid-column: span 2;
+    color: var(--0);
+    margin-left: 5px;
+    font-size: 120px;
+    text-align: center;
+    padding-left: 20px;
+    line-height: 80%;
+    text-shadow: 2px 2px 4px #0b1d45cc;
+}
+
+.current-img {
+    grid-area: current-img;
+    place-self: center;
+    width: 200px;
+    height: auto;
+}
+
+.current-stats {
+    color: var(--6);
+    font-size: 30px;
+    place-self: center;
+    font-family: "Kanit", sans-serif;
+    padding: 0 10px;
+}
+
+.key, .temp-key, .wind-key, .humidity-key {
+    color: var(--5);
+}
+
+.six-day {
+    border-radius: 2em;
+    grid-area: six-day;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    grid-gap: 10px;
+    text-align: center;
+    /* background: linear-gradient(var(--6), var(--2)); */
+    padding: 20px 0 0 0;
+}
+
+.conditions-message {
+    font-size: 30px;
+}
+
+.future-days {
+    display: grid;
+    grid-template-areas:
+    "future-date future-date"
+    "future-stats future-img";
+    /* grid-template-columns: 2;
+    grid-template-rows: 2; */
+    grid-template-columns: 3fr 2fr;
+    grid-template-rows: auto auto;
+    height: auto;
+    border-radius: 1em;
+    background: linear-gradient(var(--4), var(--1));
+}
+
+.future-date {
+    grid-column: span 2;
+}
+
+.future-date {
+    grid-area: future-date;
+    font-size: 24px;
+    place-self: center;
+}
+
+.future-img {
+    grid-area: future-img;
+    place-self: center;
+    width: 160px;
+    height: auto;
+}
+
+.conditions-message, .future-date {
+    color: var(--6);
+    font-family: "Kanit", sans-serif;
+    place-self: center;
+}
+
+.future-stats {
+    grid-area: future-stats;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 5px;
+    align-self: start;
+    max-width: 66%;
+}
+
+.future-temp, .future-wind, .future-humidity {
+    font-size: 20px;
+    font-family: "Kanit", sans-serif;
+    color: var(--6);
+    margin-left: 60px;
+    /* padding: 5px; */
 }
 
 footer {
-    background-color: gray;
+    display: flex;
+    background-color: var(--6);
     margin-top: auto;
     grid-area: footer;
+    justify-content: center;
+    align-items: center;
 }
 
 .socials {
@@ -153,7 +358,18 @@ footer {
     left: -20px;
 }
 
+.by {
+    color: var(--2);
+    font-size: 24px;
+    margin: 0 15px;
+}
 
-.future-days {
-    background-color: bisque;
+.emphasize {
+    color: var(--0);
+    font-size: 26px;
+}
+
+.wise {
+    width: 150px;
+    height: auto;
 }

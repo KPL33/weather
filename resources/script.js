@@ -81,17 +81,21 @@ const getWeather = async (cityName) => {
     const wind = data.wind.speed;
     const humidity = data.main.humidity;
 
-    //Just to get date...
     const unixTime = data.dt;
     const date = new Date(unixTime * 1000);
-    const formattedDate = date.toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
+    const year = date.getFullYear();
+    const month = date.toLocaleString("default", { month: "short" });
+    const day = date.getDate();
+
+    // Format the time in 12-hour format
+    const formattedTime = date.toLocaleString("en-US", {
       hour: "numeric",
       minute: "numeric",
-      second: "numeric",
+      hour12: true,
     });
+    const formattedDate = `${month} ${day}, ${year} @ ${formattedTime}`;
+
+    // Call getForecast function
     getForecast(data.coord.lat, data.coord.lon);
 
     return { city, icon, formattedDate, temp, wind, humidity };
@@ -165,22 +169,54 @@ async function getForecast(lat, lon) {
 }
 
 function displayWeatherData(element, date, icon, temperature, wind, humidity) {
-  // Create elements to display weather information
+  // Create a div to contain temperature, wind, and humidity
+  const weatherInfoDiv = document.createElement("div");
+  weatherInfoDiv.classList.add("future-stats");
+
+  const tempElement = document.createElement("p");
+  const tempKey = document.createElement("span");
+  tempKey.textContent = "Temperature: ";
+  const tempValue = document.createElement("span");
+  tempValue.textContent = `${temperature}°F`;
+  tempElement.appendChild(tempKey);
+  tempElement.appendChild(tempValue);
+  tempElement.classList.add("future-temp");
+  tempKey.classList.add("temp-key");
+
+  const windElement = document.createElement("p");
+  const windKey = document.createElement("span");
+  windKey.textContent = "Wind: ";
+  const windValue = document.createElement("span");
+  windValue.textContent = `${wind} mph`;
+  windElement.appendChild(windKey);
+  windElement.appendChild(windValue);
+  windElement.classList.add("future-wind");
+  windKey.classList.add("wind-key");
+
+  const humidityElement = document.createElement("p");
+  const humidityKey = document.createElement("span");
+  humidityKey.textContent = "Humidity: ";
+  const humidityValue = document.createElement("span");
+  humidityValue.textContent = `${humidity}%`;
+  humidityElement.appendChild(humidityKey);
+  humidityElement.appendChild(humidityValue);
+  humidityElement.classList.add("future-humidity");
+  humidityKey.classList.add("humidity-key");
+
+  // Append temperature, wind, and humidity elements to the weatherInfoDiv
+  weatherInfoDiv.appendChild(tempElement);
+  weatherInfoDiv.appendChild(windElement);
+  weatherInfoDiv.appendChild(humidityElement);
+
+  // Create elements to display other weather information
   const dateElement = document.createElement("p");
+  dateElement.classList.add("future-date");
   dateElement.textContent = date;
 
   const iconElement = document.createElement("img");
   iconElement.src = `https://openweathermap.org/img/w/${icon}.png`;
   iconElement.alt = "Weather Icon";
-
-  const tempElement = document.createElement("p");
-  tempElement.textContent = `Temperature: ${temperature}°F`;
-
-  const windElement = document.createElement("p");
-  windElement.textContent = `Wind: ${wind} mph`;
-
-  const humidityElement = document.createElement("p");
-  humidityElement.textContent = `Humidity: ${humidity}%`;
+  iconElement.classList.add("future-img");
 
   // Clear previous content
   element.innerHTML = "";
@@ -188,10 +224,9 @@ function displayWeatherData(element, date, icon, temperature, wind, humidity) {
   // Append weather information elements to the specified future day element
   element.appendChild(dateElement);
   element.appendChild(iconElement);
-  element.appendChild(tempElement);
-  element.appendChild(windElement);
-  element.appendChild(humidityElement);
+  element.appendChild(weatherInfoDiv);
 }
+
 
 const handleSearch = async (e) => {
   e.preventDefault();
@@ -210,26 +245,68 @@ const handleSearch = async (e) => {
     setHistory();
 
     try {
-      const { city, formattedDate, temp, wind, humidity, icon } = await getWeather(searchValue);
+      const { city, formattedDate, temp, wind, humidity, icon } =
+        await getWeather(searchValue);
 
       const cityHeading = document.createElement("h1");
       cityHeading.textContent = city;
 
-      const details = document.createElement("h3");
-      details.textContent = `${formattedDate}: ${temp}°F, Wind ${wind} mph, Humidity ${humidity}%`;
-
       const iconElement = document.createElement("img");
       iconElement.src = `https://openweathermap.org/img/w/${icon}.png`;
       iconElement.alt = "Weather Icon";
+      iconElement.classList.add("current-img");
+
+      const dateElement = document.createElement("h3");
+      dateElement.textContent = formattedDate;
+
+      const temperatureElement = document.createElement("h3");
+      const temperatureKey = document.createElement("span");
+      temperatureKey.textContent = "Temperature: ";
+      const temperatureValue = document.createElement("span");
+      temperatureValue.textContent = `${temp}°F`;
+      temperatureElement.appendChild(temperatureKey);
+      temperatureElement.appendChild(temperatureValue);
+      temperatureElement.classList.add("current-stats");
+      temperatureKey.classList.add("key");
+      // temperatureValue.classList.add("value");
+
+      const windElement = document.createElement("h3");
+      const windKey = document.createElement("span");
+      windKey.textContent = "Wind: ";
+      const windValue = document.createElement("span");
+      windValue.textContent = `${wind} mph`;
+      windElement.appendChild(windKey);
+      windElement.appendChild(windValue);
+      windElement.classList.add("current-stats");
+      windKey.classList.add("key");
+      // windValue.classList.add("value");
+
+      const humidityElement = document.createElement("h3");
+      const humidityKey = document.createElement("span");
+      humidityKey.textContent = "Humidity: ";
+      const humidityValue = document.createElement("span");
+      humidityValue.textContent = `${humidity}%`;
+      humidityElement.appendChild(humidityKey);
+      humidityElement.appendChild(humidityValue);
+      humidityElement.classList.add("current-stats");
+      humidityKey.classList.add("key");
+      // humidityValue.classList.add("value");
+
+      const conditionsMessage = document.createElement("p");
+      conditionsMessage.classList.add("conditions-message");
+      conditionsMessage.textContent = `As of ${formattedDate}, here are current conditions in`;
 
       cityError.style.display = "none";
       current.innerHTML = "";
+
+      current.appendChild(conditionsMessage);
       current.appendChild(cityHeading);
       current.appendChild(iconElement);
-      current.appendChild(details);
-      
-      setHistory(city);
+      current.appendChild(temperatureElement);
+      current.appendChild(windElement);
+      current.appendChild(humidityElement);
 
+      setHistory(city);
     } catch (error) {
       hasCityError = true;
       cityError.textContent = error.message; // Display the error message from the caught error
@@ -239,7 +316,6 @@ const handleSearch = async (e) => {
         // Clear current weather display only for city not found error
         current.innerHTML = "";
       }
-      
     }
   }
 
