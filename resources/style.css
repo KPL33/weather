@@ -17,7 +17,7 @@
 }
 
 body {
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 1fr 4fr;
     grid-template-rows: auto 100px;
     grid-template-areas:
     "aside results"
@@ -40,6 +40,9 @@ header, .wwlogo, .current-img, .current-default, .future-days, .future-default, 
 header {
     grid-area: header;
     background: radial-gradient(circle, var(--3), var(--6));
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .wwlogo {
@@ -52,9 +55,8 @@ aside {
     "header"
     "search"
     "history";
-    grid-template-rows: 1fr 1fr 2fr;
     background-color: var(--1);
-
+    grid-template-rows: 2fr 1fr 2fr;
 }
 
 .search {
@@ -68,10 +70,10 @@ aside {
 
 .search-title {
     grid-area: search-title;
-    margin: 5px 20px 0px 20px;
+    margin: 5px 20px;
 }
 
-.search, .history, .results, .six-day {
+.results, .six-day {
     grid-gap: 10px;
 }
 
@@ -183,6 +185,10 @@ aside {
     grid-area: history-title;
 }
 
+#current-conditions, .history-title {
+    margin-top: 20px;
+}
+
 .history-title, .current-stats, .conditions-message, .future-date, .future-temp, .future-wind, .future-humidity {
     color: var(--6);
 }
@@ -208,16 +214,17 @@ aside {
 
 #current-conditions {
     grid-template-areas:
-    "message message message"
-    "current-city current-city current-img"
-    "current-stats current-stats current-stats";
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto 200px auto;
+        "message message message"
+        "current-city current-city current-img"
+        "current-stats current-stats current-stats";
+    place-items: center;
     grid-area: current-conditions; 
     margin-top: 20px;
     background: linear-gradient(var(--5), var(--0));
     grid-gap: 30px;
     grid-template-columns: repeat(auto-fit, minmax(200px, 33.33%));
+    grid-template-rows: min-content min-content min-content;
+    padding: 20px 0;
 }
 
 .conditions-message {
@@ -239,8 +246,8 @@ aside {
 
 .current-img {
     grid-area: current-img;
-    width: 300px;
-    /* margin-bottom: 25%; */
+    width: 400px;
+    margin-bottom: 25px;
 }
 
 .current-stats {
@@ -258,11 +265,10 @@ aside {
 }
 
 .current-default {
-    grid-area: current-default;
-    width: 400px;
-    display: block;
-    margin: 0 auto;
-
+    position: relative;
+    top: 10%;
+    left: 100%;
+    width: 600px;
 }
 
 .six-day {
@@ -284,7 +290,7 @@ aside {
 
 .future-default {
     width: 200px;
-    display: block;
+    position: relative;
     margin-left: 50%;
     margin-top: 15%;
 }
