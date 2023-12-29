@@ -20,7 +20,7 @@ body {
     grid-template-columns: 1fr 3fr;
     grid-template-rows: auto 100px;
     grid-template-areas:
-    "aside results"
+    "search results"
     "footer footer";
     min-height: 100vh;
 }
@@ -47,12 +47,11 @@ header {
 }
 
 aside {
-    grid-area: aside;
     grid-template-areas:
     "header"
     "search"
     "history";
-    grid-template-rows: 1fr 1fr 2fr;
+    grid-template-rows: 2fr 2fr 4fr;
     background-color: var(--1);
 
 }
@@ -79,7 +78,7 @@ aside {
     padding: 10px;
 }
 
-.search-title, .btn, #search-input, .conditions-message, .current-stats, .future-date, .future-img  {
+.search-title, .btn, #search-input, .conditions-message, .current-img, .current-stats, .future-date, .future-img  {
     place-self: center;
 }
 
@@ -118,7 +117,6 @@ aside {
 
 .btn, .history-title, .conditions-message, .current-stats, .future-date, .by {
     font-family: "Kanit", sans-serif;
-    line-height: 95%;
 }
 
 #history-list .btn {
@@ -127,7 +125,7 @@ aside {
     padding: 0 10px;
 }
 
-.search-title, #search-input, .history-title {
+.search-title, #search-input, .history-title, #current-conditions h1 {
     font-size: 38px;
 }
 
@@ -138,7 +136,6 @@ aside {
 #search-btn {
     grid-area: search-btn;
     width: 70%;
-    height: 70%;
     margin: 10px 0;
 }
 
@@ -194,7 +191,6 @@ aside {
 
 #history-list .btn  {
     margin: 10px;
-    padding: 10px;
 }
 
 .results {
@@ -212,18 +208,17 @@ aside {
     "current-city current-city current-img"
     "current-stats current-stats current-stats";
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto 200px auto;
+    grid-template-rows: auto min-content auto;
+    grid-column: span 3;
     grid-area: current-conditions; 
-    margin-top: 20px;
+    margin-top: 30px;
     background: linear-gradient(var(--5), var(--0));
-    grid-gap: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 33.33%));
 }
 
 .conditions-message {
     grid-area: message;
     grid-column: span 3;
-    font-size: clamp(14px, 3vw, 44px);
+    font-size: 30px;
     padding: 0 20px;
 }
 
@@ -231,7 +226,7 @@ aside {
     grid-area: current-city;
     grid-column: span 2;
     margin-left: 5px;
-    font-size: 140px;
+    font-size: 120px;
     padding-left: 20px;
     line-height: 80%;
     text-shadow: 2px 2px 4px #0b1d45cc;
@@ -239,12 +234,11 @@ aside {
 
 .current-img {
     grid-area: current-img;
-    width: 300px;
-    /* margin-bottom: 25%; */
+    width: 200px;
 }
 
 .current-stats {
-    font-size: clamp(14px, 3vw, 36px);
+    font-size: 30px;
     padding: 0 10px;
 }
 
@@ -252,23 +246,21 @@ aside {
     color: var(--5);
 }
 
-#current-conditions > *:nth-child(4),
-#current-conditions > *:nth-child(5) {
-    margin-left: 20px;
-}
-
-.current-default {
-    grid-area: current-default;
-    width: 400px;
-    display: block;
-    margin: 0 auto;
-
-}
-
 .six-day {
     grid-area: six-day;
     grid-template-columns: repeat(2, 1fr);
     padding: 20px 0 0 0;
+}
+
+.current-default {
+    width: 500px;
+    display: block;
+    margin-left: 55%;
+    margin-top: 10%;
+}
+
+.conditions-message {
+    font-size: 30px;
 }
 
 .future-days {
@@ -379,5 +371,4 @@ footer {
 
 .open {
     width: 150px;
-    margin-right: 20px;
 }

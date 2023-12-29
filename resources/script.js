@@ -13,6 +13,8 @@ const blankError = document.querySelector("#blank-error");
 
 let searchHistory = [];
 
+
+
 const setSearchValue = () => {
   searchValue = inputForm.value.trim();
 };
@@ -177,7 +179,7 @@ function displayWeatherData(element, date, icon, temperature, wind, humidity) {
   const tempKey = document.createElement("span");
   tempKey.textContent = "Temperature: ";
   const tempValue = document.createElement("span");
-  tempValue.textContent = `${temperature}°F`;
+  tempValue.textContent = `${Math.round(temperature)}°F`;
   tempElement.appendChild(tempKey);
   tempElement.appendChild(tempValue);
   tempElement.classList.add("future-temp");
@@ -187,7 +189,7 @@ function displayWeatherData(element, date, icon, temperature, wind, humidity) {
   const windKey = document.createElement("span");
   windKey.textContent = "Wind: ";
   const windValue = document.createElement("span");
-  windValue.textContent = `${wind} mph`;
+  windValue.textContent = `${Math.round(wind)} mph`;
   windElement.appendChild(windKey);
   windElement.appendChild(windValue);
   windElement.classList.add("future-wind");
@@ -263,23 +265,21 @@ const handleSearch = async (e) => {
       const temperatureKey = document.createElement("span");
       temperatureKey.textContent = "Temperature: ";
       const temperatureValue = document.createElement("span");
-      temperatureValue.textContent = `${temp}°F`;
+      temperatureValue.textContent = `${Math.round(temp)}°F`;
       temperatureElement.appendChild(temperatureKey);
       temperatureElement.appendChild(temperatureValue);
       temperatureElement.classList.add("current-stats");
       temperatureKey.classList.add("key");
-      // temperatureValue.classList.add("value");
 
       const windElement = document.createElement("h3");
       const windKey = document.createElement("span");
       windKey.textContent = "Wind: ";
       const windValue = document.createElement("span");
-      windValue.textContent = `${wind} mph`;
+      windValue.textContent = `${Math.round(wind)} mph`;
       windElement.appendChild(windKey);
       windElement.appendChild(windValue);
       windElement.classList.add("current-stats");
       windKey.classList.add("key");
-      // windValue.classList.add("value");
 
       const humidityElement = document.createElement("h3");
       const humidityKey = document.createElement("span");
@@ -290,14 +290,17 @@ const handleSearch = async (e) => {
       humidityElement.appendChild(humidityValue);
       humidityElement.classList.add("current-stats");
       humidityKey.classList.add("key");
-      // humidityValue.classList.add("value");
 
       const conditionsMessage = document.createElement("p");
       conditionsMessage.classList.add("conditions-message");
-      conditionsMessage.textContent = `As of ${formattedDate}, here are current conditions in`;
+      conditionsMessage.textContent = `As of ${formattedDate} your time, here are current conditions in `;
 
       cityError.style.display = "none";
-      current.innerHTML = "";
+
+      // Don't clear the current div unless city not found error
+      if (!current.innerHTML.includes("City not found")) {
+        current.innerHTML = ""; // Clear current weather display
+      }
 
       current.appendChild(conditionsMessage);
       current.appendChild(cityHeading);
@@ -309,9 +312,9 @@ const handleSearch = async (e) => {
       setHistory(city);
     } catch (error) {
       hasCityError = true;
-      cityError.textContent = error.message; // Display the error message from the caught error
+      cityError.textContent = error.message;
       cityError.style.display = "block";
-      // Clear current weather display
+
       if (error.message.includes("City not found")) {
         // Clear current weather display only for city not found error
         current.innerHTML = "";
@@ -325,6 +328,7 @@ const handleSearch = async (e) => {
 
   inputForm.value = "";
 };
+
 
 searchBtn.addEventListener("click", handleSearch);
 
