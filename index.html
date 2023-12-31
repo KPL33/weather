@@ -1,86 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WeatherWise</title>
-    <script src="./resources/script.js" defer></script>
-    <link rel="stylesheet" href="./resources/style.css" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Edu+QLD+Beginner:wght@600&family=Kanit:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
-</head>
-<body>
-    <aside>
-        <header>
-            <img class="wwlogo" src="./resources/assets/weather_wise.png">
-        </header>
-        <div class="search">
-            <h2 class="search-title">Search for a city.</h2>
-            <textarea
-            id="search-input"
-            placeholder=""
-            aria-label="City search field"
-            ></textarea>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WeatherWise</title>
+        <script src="./resources/script.js" defer></script>
+        <link rel="stylesheet" href="./resources/style.css" />
         
-            <h4 class="error" id="city-error">
-            City not found. Please try your search again.</h4>
-
-            <h4 class="error" id="blank-error">
-            Please enter a city name before searching.</h4>
-
-            <button type="em" class="btn" id="search-btn">Search</button>
-        </div>
-
-        <div class="history">
-            <h2 class="history-title">History</h2>
-            <div id="history-list"></div>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+QLD+Beginner:wght@600&family=Kanit:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <aside>
+            <header>
+                <img class="wwlogo" src="./resources/assets/weather_wise.png">
+            </header>
+            <div class="search">
+                <h2 class="search-title">Search for a city.</h2>
+                <textarea
+                id="search-input"
+                placeholder=""
+                aria-label="City search field"
+                ></textarea>
             
-        </div>
-    </aside>
+                <h4 class="error" id="city-error">
+                City not found. Please try your search again.</h4>
 
-    <main class="results">
-        <div id="current-conditions">
-            <img src="./resources/assets/sun.svg" alt="Sun Icon" class="current-default" />
-        </div>
-    
-        <div class="six-day">
-            
-            <div class="future-days">
-                <img src="./resources/assets/sun.svg" alt="Sun Icon" class="future-default" />
+                <h4 class="error" id="blank-error">
+                Please enter a city name before searching.</h4>
+
+                <button type="em" class="btn" id="search-btn">Search</button>
             </div>
-            <div class="future-days">
-                <img src="./resources/assets/sun.svg" alt="Sun Icon" class="future-default" />
-            </div>
-            <div class="future-days">
-                <img src="./resources/assets/sun.svg" alt="Sun Icon" class="future-default" />
-            </div>
-            <div class="future-days">
-                <img src="./resources/assets/sun.svg" alt="Sun Icon" class="future-default" />
-            </div>
-            
-        </div>
-    </main>
 
-    <footer>
-        <h5 class = "by">Made by <span class="emphasize">Kevin Lewis</span></h5>
-        <div class="socials">
-            <a href="https://www.linkedin.com/in/kevin-lewis92126/"><img id="linkedin" src="./resources/assets/LI-In-Bug.svg" alt="LinkedIn logo"
-            /></a>
-            
-            <a href="https://github.com/KPL33"><img id="github" src="./resources/assets/Github.svg" alt="GitHub logo"
-            /></a>
-            
-            <a href="https://leetcode.com/KPL33/">
-                <img
-                    id="leetcode"
-                    src="./resources/assets/leetcode_logo.svg"
-            alt="LeetCode logo"
-            /></a>
-        </div>
-        <h5 class = "by">Powered by</h5>
-        <img class = "open" src="./resources/assets/openweather_white_text.svg"></div>
-    </footer>
-</body>
+            <div class="history">
+                <h2 class="history-title">History</h2>
+                <div id="history-list"></div>
+                
+            </div>
+        </aside>
+
+        <main class="results">
+            <div id="current-conditions">
+                <img src="./resources/assets/sun.svg" alt="Sun Icon" class="current-default" />
+            </div>
+        
+            <div class="six-day">
+                
+                <div class="future-days">
+                    <img src="./resources/assets/sun.svg" alt="Sun Icon" class="future-default" />
+                </div>
+                <div class="future-days">
+                    <img src="./resources/assets/sun.svg" alt="Sun Icon" class="future-default" />
+                </div>
+                <div class="future-days">
+                    <img src="./resources/assets/sun.svg" alt="Sun Icon" class="future-default" />
+                </div>
+                <div class="future-days">
+                    <img src="./resources/assets/sun.svg" alt="Sun Icon" class="future-default" />
+                </div>
+                
+            </div>
+        </main>
+
+        <footer>
+            <div class = "by">    
+                <h5>Made by <span class="emphasize">Kevin Lewis</span></h5>
+            </div>
+            <div class="socials">
+                <a href="https://www.linkedin.com/in/kevin-lewis92126/"><img id="linkedin" src="./resources/assets/LI-In-Bug.svg" alt="LinkedIn logo"
+                /></a>
+                
+                <a href="https://github.com/KPL33"><img id="github" src="./resources/assets/Github.svg" alt="GitHub logo"
+                /></a>
+                
+                <a href="https://leetcode.com/KPL33/">
+                    <img
+                        id="leetcode"
+                        src="./resources/assets/leetcode_logo.svg"
+                alt="LeetCode logo"
+                /></a>
+            </div>
+            <div class = "by">
+                <h5>Powered by</h5>
+                <img class = "open" src="./resources/assets/openweather_white_text.svg"></div>
+            </div>
+
+        </footer>
+    </body>
 </html>

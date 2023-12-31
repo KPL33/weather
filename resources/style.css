@@ -57,6 +57,7 @@ aside {
     "history";
     background-color: var(--1);
     grid-template-rows: 2fr 1fr 2fr;
+    
 }
 
 .search {
@@ -183,9 +184,6 @@ aside {
 
 .history-title {
     grid-area: history-title;
-}
-
-#current-conditions, .history-title {
     margin-top: 20px;
 }
 
@@ -210,9 +208,11 @@ aside {
     "six-day";
     padding: 0 10px;
     grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
 }
 
 #current-conditions {
+    position: relative;
     grid-template-areas:
         "message message message"
         "current-city current-city current-img"
@@ -222,25 +222,24 @@ aside {
     margin-top: 20px;
     background: linear-gradient(var(--5), var(--0));
     grid-gap: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 33.33%));
-    grid-template-rows: min-content min-content min-content;
-    padding: 20px 0;
+    grid-template-columns: repeat(auto);
+    grid-template-rows: repeat(auto);
+    padding: 20px
 }
 
 .conditions-message {
+    margin: 0 20px;
     grid-area: message;
     grid-column: span 3;
-    font-size: clamp(14px, 3vw, 44px);
-    padding: 0 20px;
 }
 
 #current-conditions h1 {
     grid-area: current-city;
     grid-column: span 2;
     margin-left: 5px;
-    font-size: 140px;
+    font-size: clamp(180px, 3vw, 12px);
     padding-left: 20px;
-    line-height: 80%;
+    line-height: 92%;
     text-shadow: 2px 2px 4px #0b1d45cc;
 }
 
@@ -250,8 +249,11 @@ aside {
     margin-bottom: 25px;
 }
 
+.conditions-message, .current-stats {
+    font-size: clamp(50px, 3vw, 12px);
+}
+
 .current-stats {
-    font-size: clamp(14px, 3vw, 36px);
     padding: 0 10px;
 }
 
@@ -267,7 +269,7 @@ aside {
 .current-default {
     position: relative;
     top: 10%;
-    left: 100%;
+    left: 40%;
     width: 600px;
 }
 
@@ -281,8 +283,6 @@ aside {
     grid-template-areas:
     "future-date future-date"
     "future-stats future-img";
-    /* grid-template-columns: 2;
-    grid-template-rows: 2; */
     grid-template-columns: 3fr 2fr;
     border-radius: 1em;
     background: linear-gradient(var(--4), var(--1));
@@ -291,19 +291,19 @@ aside {
 .future-default {
     width: 200px;
     position: relative;
-    margin-left: 50%;
-    margin-top: 15%;
+    margin-left: 60%;
+    margin-top: 10%;
 }
 
 .future-date {
     grid-column: span 2;
     grid-area: future-date;
-    font-size: 24px;
+    font-size: clamp(36px, 3vw, 12px);
 }
 
 .future-img {
     grid-area: future-img;
-    width: 160px;
+    width: 200px;
     margin-bottom: 20px;
 }
 
@@ -317,17 +317,18 @@ aside {
 }
 
 .future-temp, .future-wind, .future-humidity {
-    font-size: 20px;
+    font-size: 28px;
     font-family: "Kanit", sans-serif;
     margin-left: 60px;
-    /* padding: 5px; */
+    line-height: 99%;
+    margin: 5px 0;
 }
 
 footer {
+    flex-direction: row;
     display: flex;
-    margin-top: auto;
     grid-area: footer;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -377,7 +378,12 @@ footer {
     left: -20px;
 }
 
+h5 span {
+    margin-left: 10px;
+}
+
 .by {
+    display: flex;
     color: var(--2);
     font-size: 24px;
     margin: 0 15px;
@@ -386,4 +392,190 @@ footer {
 .open {
     width: 150px;
     margin-right: 20px;
+}
+
+@media screen and (max-width: 1900px) {
+    body {
+        grid-template-columns: 1fr 3fr;
+    }
+
+    .current-default {
+        left: 30%;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    aside { grid-template-rows: 2fr 1fr 3fr;
+    }
+
+    .current-default {
+        left: 20%;
+    }
+
+    .future-default {
+        top: 10%;
+        right: 5%;
+    }
+}
+
+@media screen and (max-width: 1350px) {
+    body {
+        grid-template-areas:
+            "aside"
+            "results"
+            "footer";
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 3fr auto;
+    }
+
+    .current-default {
+        left: 30%;
+    }
+
+    aside {
+        grid-area: aside;
+        grid-template-areas:
+            "header search search"
+            "header history history";
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .search {
+    border-style: none;
+    }
+
+    .results {
+        grid-area: results;
+        grid-template-rows: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    aside {
+        grid-template-columns: 1fr 3fr;
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-areas:
+        "header search"
+        "history history"
+    }
+
+    .wwlogo {
+        width: 100%;
+    }
+
+    body {
+        grid-template-rows: 2fr 4fr auto;
+    }
+
+    .results {
+        grid-template-rows: 1fr auto;
+    }
+
+    #history-list {
+        padding: 0;
+    }
+    
+    .history-title {
+        margin: 20px 0 0 0; 
+    }
+
+    .current-default {
+        left: 20%;
+    }
+
+    .future-default {
+        right: 8%;
+        margin-bottom: 40px;
+    }
+
+    .future-date {
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .current-default {
+        left: 15%;
+    }
+
+    .future-default {
+        right: 20%;
+        margin-bottom: 40px;
+    }
+
+}
+
+
+@media screen and (max-width: 825px) {
+    body {
+        grid-template-areas:
+        "aside"
+        "results"
+        "footer";
+        grid-template-rows: auto 1fr auto;
+    }
+
+    .results {
+        grid-template-areas:
+        "current-conditions"
+        "six-day";
+        padding: 0 15px;
+    }
+
+    .six-day {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+        "future-days"
+        "future-days"
+        "future-days"
+        "future-days";
+        grid-template-rows: repeat(4, 1fr);
+    }
+
+    .future-days {
+        width: 100%;
+    }
+
+    .current-default {
+        width: 300px;
+        left: 35%;
+    }
+
+    .future-default {
+        left: 1%;
+        top: -1%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        grid-template-rows: auto 3fr auto;
+    }
+
+    .results {
+        grid-template-rows: auto auto;
+        padding-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .current-default {
+        width: 300px;
+        left: 15%;
+    }
+
+    .future-default {
+        right: 20%;
+        margin-left: 45%;
+        top: -1%;
+    }
+
+    footer {
+        flex-direction: column;
+        margin-top: -20px;
+    }
+
+    .by {
+        margin: 20px 0;
+    }
 }
