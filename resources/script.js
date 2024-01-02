@@ -13,8 +13,6 @@ const blankError = document.querySelector("#blank-error");
 
 let searchHistory = [];
 
-
-
 const setSearchValue = () => {
   searchValue = inputForm.value.trim();
 };
