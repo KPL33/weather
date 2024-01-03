@@ -570,10 +570,10 @@ h5 span {
         top: -1%;
     }
 
-    footer {
+    /* footer {
         flex-direction: column;
         margin-top: -20px;
-    }
+    } */
 
     .by {
         margin: 20px 0;

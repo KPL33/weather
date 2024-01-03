@@ -13,6 +13,13 @@ const blankError = document.querySelector("#blank-error");
 
 let searchHistory = [];
 
+const triggerResizeEvent = () => {
+  const resizeEvent = window.document.createEvent("UIEvents");
+  resizeEvent.initEvent("resize", true, false);
+  window.dispatchEvent(resizeEvent);
+}
+
+
 const setSearchValue = () => {
   searchValue = inputForm.value.trim();
 };
@@ -43,6 +50,7 @@ const getHistory = () => {
 };
 
 window.addEventListener("load", () => {
+  triggerResizeEvent();
   getHistory();
 });
 
@@ -325,6 +333,8 @@ const handleSearch = async (e) => {
   }
 
   inputForm.value = "";
+
+  triggerResizeEvent();
 };
 
 
